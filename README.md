@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -73,3 +74,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 # covid_tracker
 CSE 412 Final Project
 >>>>>>> 97c2eb915992f319e3e3ff4208d2de53e88b12b8
+=======
+# covid_tracker
+CSE 412 Final Project
+>>>>>>> 0fceed9326ea81a6ef147386db52a907104889f8
