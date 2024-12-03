@@ -29,7 +29,6 @@ function City() {
   // Handle adding a new city
   
   const handleAddCity = () => {
-    // Ensure all fields are filled
     if (!newCity.name || !newCity.population || !newCity.vaccination_rate || !newCity.recovery_rate) {
       alert('Please fill in all fields.');
       return;
@@ -44,15 +43,16 @@ function City() {
         if (!response.ok) {
           throw new Error('Failed to add city');
         }
-        return response.json();
+        return response.json(); // Get the city with its new ID
       })
-      .then(() => {
-        // Reload cities and reset the form
-        setCities([...cities, { ...newCity, cityid: cities.length + 1 }]); // Fake ID for UI update
+      .then((addedCity) => {
+        // Add the new city with its ID to the state
+        setCities([...cities, addedCity]);
         setNewCity({ name: '', population: '', vaccination_rate: '', recovery_rate: '' });
       })
       .catch((error) => console.error('Error adding city:', error));
   };
+  
   
 
   // Handle deleting a city
@@ -64,11 +64,11 @@ function City() {
         if (!response.ok) {
           throw new Error(`Failed to delete city with ID ${id}`);
         }
-        // Remove the deleted city from the UI
-        setCities(cities.filter((city) => city.cityid !== id));
+        setCities(cities.filter((city) => city.cityid !== id)); // Update state to remove the city
       })
       .catch((error) => console.error('Error deleting city:', error));
-  };  
+  };
+   
 
   return (
     <div>
