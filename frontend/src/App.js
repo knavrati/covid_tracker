@@ -7,6 +7,7 @@ import Person from './components/Person';
 import Hospital from './components/Hospital';
 import Precaution from './components/Precaution';
 import Case from './components/Case';
+import './App.css';
 
 function App() {
   return (
@@ -25,7 +26,24 @@ function App() {
         </div>
         {/* Page Routes */}
         <Routes>
-          <Route path="/" element={<h2>Welcome to the COVID Tracker! Use the buttons above to navigate.</h2>} />
+          <Route
+            path="/"
+            element={
+              <div>
+                <h2>Welcome to the COVID Tracker! Use the buttons above to navigate.</h2>
+                <img
+                  src="/download.jpg"
+                  alt="COVID-19"
+                  style={{
+                    width: '40%', 
+                    marginTop: '20px',
+                    borderRadius: '10px',
+                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+                  }}
+                />
+              </div>
+            }
+          />
           <Route path="/cities" element={<City />} />
           <Route path="/countries" element={<Country />} />
           <Route path="/vaccines" element={<Vaccine />} />

@@ -1,38 +1,114 @@
-.App {
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ff; /* Light blue background */
+  margin: 0;
+  padding: 0;
+  text-align: center; /* Center all content */
+}
+
+/* Header Styles */
+h1 {
+  color: #1e90ff; /* Dodger blue for header */
+  margin-top: 20px;
+}
+
+h2, h3 {
+  color: #4682b4; /* Steel blue for subheaders */
+}
+
+/* Navigation Buttons */
+button {
+  background-color: #1e90ff; /* Dodger blue */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #4682b4; /* Darker blue on hover */
+}
+
+/* Table Styles */
+.table {
+  margin: 0 auto; /* Center table */
+  border-collapse: collapse;
+  width: 90%; /* Adjust width */
+}
+
+.table th, .table td {
+  border: 1px solid #ccc;
+  padding: 10px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.table th {
+  background-color: #1e90ff; /* Blue table headers */
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.table td {
+  background-color: #f0f8ff; /* Light blue table rows */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Form Styles */
+form {
+  display: inline-block; /* Center the form */
+  margin-top: 20px;
+}
+
+input {
+  margin: 10px 0;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button.btn-primary {
+  background-color: #1e90ff; /* Primary blue button */
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%; /* Full-width button */
+}
+
+button.btn-primary:hover {
+  background-color: #4682b4; /* Darker blue on hover */
+}
+
+/* Footer (Optional) */
+footer {
+  background-color: #1e90ff;
+  color: white;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .table {
+    width: 100%;
   }
-  to {
-    transform: rotate(360deg);
+
+  button {
+    width: 90%;
+    margin: 5px auto;
+    display: block;
+  }
+
+  form {
+    width: 90%;
   }
 }

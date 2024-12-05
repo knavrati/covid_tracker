@@ -7,21 +7,29 @@ function Case() {
     case_date: '',
   });
 
-  // Fetch all cases
+  // Fetch cases from the backend
   useEffect(() => {
-    fetch('http://localhost:5000/cases')
+    fetch('http://localhost:5000/cases') // Backend endpoint for cases
       .then((response) => response.json())
       .then((data) => setCases(data))
       .catch((error) => console.error('Error fetching cases:', error));
   }, []);
 
-  // Handle form input changes
+  const handleDelete = (id) => {
+    fetch(`http://localhost:5000/cases/${id}`, {
+      method: 'DELETE',
+    })
+      .then(() => setCases(cases.filter((c) => c.caseid !== id)))
+      .catch((error) => console.error('Error deleting case:', error));
+  };
+
+  // Handle input changes for adding a new case
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewCase({ ...newCase, [name]: value });
   };
 
-  // Add a new case
+  // Handle adding a new case
   const handleAddCase = () => {
     if (!newCase.status || !newCase.case_date) {
       alert('Please fill in all fields.');
@@ -37,34 +45,27 @@ function Case() {
         if (!response.ok) {
           throw new Error('Failed to add case');
         }
-        return response.json();
+        return response.json(); // Return the added case
       })
       .then((addedCase) => {
-        setCases([...cases, addedCase]);
-        setNewCase({ status: '', case_date: '' }); // Reset form
+        setCases([...cases, addedCase]); // Update the state with the new case
+        setNewCase({ status: '', case_date: '' }); // Reset the form
       })
       .catch((error) => console.error('Error adding case:', error));
   };
 
-  // Delete a case
-  const handleDeleteCase = (id) => {
-    fetch(`http://localhost:5000/cases/${id}`, {
-      method: 'DELETE',
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Failed to delete case with ID ${id}`);
-        }
-        setCases(cases.filter((c) => c.caseid !== id)); // Update state
-      })
-      .catch((error) => console.error('Error deleting case:', error));
-  };
+  // Function to format the casedate string
+  function formatDate(dateString) {
+    if (!dateString) return 'N/A'; // Handle empty or invalid dates
+    const date = new Date(dateString); // Parse the string as a Date
+    return date.toLocaleDateString(); // Format it for display (e.g., MM/DD/YYYY)
+  }
 
   return (
     <div>
       <h2>Cases</h2>
-      <table className="table table-striped table-bordered">
-        <thead className="thead-dark">
+      <table className="table">
+        <thead>
           <tr>
             <th>ID</th>
             <th>Status</th>
@@ -77,14 +78,9 @@ function Case() {
             <tr key={c.caseid}>
               <td>{c.caseid}</td>
               <td>{c.status}</td>
-              <td>{c.case_date}</td>
+              <td>{formatDate(c.casedate)}</td>
               <td>
-                <button
-                  className="btn btn-danger btn-sm"
-                  onClick={() => handleDeleteCase(c.caseid)}
-                >
-                  Delete
-                </button>
+                <button onClick={() => handleDelete(c.caseid)}>Delete</button>
               </td>
             </tr>
           ))}
@@ -98,7 +94,7 @@ function Case() {
             type="text"
             className="form-control"
             name="status"
-            placeholder="Status (e.g., Active, Recovered)"
+            placeholder="Status"
             value={newCase.status}
             onChange={handleInputChange}
           />
